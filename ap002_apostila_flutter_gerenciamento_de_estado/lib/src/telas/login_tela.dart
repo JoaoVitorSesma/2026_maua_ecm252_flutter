@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 
 import '../blocs/bloc.dart';
+import '../blocs/provider.dart';
 
 class LoginTela extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final bloc = Provider.of(context);
     return Container(
       margin: EdgeInsets.all(20.0),
       child: Column(
         children: [
-          emailField(),
-          passwordField(),
+          emailField(bloc),
+          passwordField(bloc),
           Container(
             margin: EdgeInsets.only(top: 12.0),
-            child: Row(children: [Expanded(child: submitButton())]),
+            child: Row(children: [Expanded(child: submitButton(bloc))]),
           ),
         ],
       ),
     );
   }
 
-  Widget emailField() {
+  Widget emailField(Bloc bloc) {
     return StreamBuilder(
       stream: bloc.email,
       builder: (context, AsyncSnapshot<String> snapshot) {
@@ -37,7 +39,7 @@ class LoginTela extends StatelessWidget {
     );
   }
 
-  Widget passwordField() {
+  Widget passwordField(Bloc bloc) {
     return StreamBuilder(
       stream: bloc.password,
       builder: (context, AsyncSnapshot<String> snapshot) {
@@ -54,7 +56,7 @@ class LoginTela extends StatelessWidget {
     );
   }
 
-  Widget submitButton() {
+  Widget submitButton(Bloc bloc) {
     return ElevatedButton(onPressed: () {}, child: Text('Login'));
   }
 }
