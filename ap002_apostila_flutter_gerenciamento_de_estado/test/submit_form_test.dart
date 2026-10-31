@@ -1,22 +1,51 @@
-import 'dart:async';
-
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gerenciamento_de_estado/src/blocs/bloc.dart';
+import 'package:gerenciamento_de_estado/src/app.dart';
+import 'package:gerenciamento_de_estado/src/blocs/provider.dart' as escopo;
 
 void main() {
-  test('A submissao ficticia imprime os ultimos valores digitados', () {
-    final bloc = Bloc();
+  testWidgets('Login envia ao Toast os ultimos valores digitados', (
+    tester,
+  ) async {
+    const canal = MethodChannel('PonnamKarthik/fluttertoast');
+    final chamadas = <MethodCall>[];
+    final messenger =
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+    messenger.setMockMethodCallHandler(canal, (chamada) async {
+      chamadas.add(chamada);
+      return true;
+    });
+    addTearDown(() => messenger.setMockMethodCallHandler(canal, null));
+
+    await tester.pumpWidget(App());
+    final bloc = escopo.Provider.of(
+      tester.element(find.byType(TextField).first),
+    );
     addTearDown(bloc.dispose);
-    final mensagens = <String>[];
-    runZoned(() {
-      bloc.changeEmail('primeiro@example.com');
-      bloc.changePassword('1234');
-      bloc.changeEmail('ultimo@example.com');
-      bloc.changePassword('5678');
-      bloc.submitForm();
-    }, zoneSpecification: ZoneSpecification(print: (self, parent, zone, texto) {
-      mensagens.add(texto);
-    }));
-    expect(mensagens, ['ultimo@example.com, 5678']);
+    await tester.enterText(
+      find.byType(TextField).first,
+      'primeiro@example.com',
+    );
+    await tester.enterText(find.byType(TextField).last, '1234');
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField).first, 'ultimo@example.com');
+    await tester.enterText(find.byType(TextField).last, '5678');
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Login'));
+    await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 1));
+
+    expect(chamadas, hasLength(1));
+    expect(chamadas.single.method, 'showToast');
+    final argumentos = chamadas.single.arguments as Map;
+    expect(argumentos['msg'], 'E-mail: ultimo@example.com, Password: 5678');
+    expect(argumentos['length'], 'short');
+    expect(argumentos['gravity'], 'center');
+    expect(argumentos['time'], 1);
+    expect(argumentos['bgcolor'], 0xFF2196F3);
+    expect(argumentos['textcolor'], 0xFFFFFFFF);
+    expect(argumentos['fontSize'], 16.0);
+    expect(tester.takeException(), isNull);
   });
 }

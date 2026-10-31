@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   email_validator: 2.1.16
   rxdart: ^0.28.0
+  fluttertoast: ^10.0.2
 
 dev_dependencies:
   flutter_test:
