@@ -4,17 +4,23 @@ import 'package:gerenciamento_de_estado/src/blocs/bloc.dart';
 import 'package:gerenciamento_de_estado/src/blocs/provider.dart' as escopo;
 
 void main() {
-  testWidgets('Cada descendente recebe o Bloc do Provider mais proximo', (tester) async {
+  testWidgets('Cada descendente recebe o Bloc do Provider mais proximo', (
+    tester,
+  ) async {
     final blocos = <Bloc>[];
-    Widget descendente() => Builder(builder: (context) {
-      blocos.add(escopo.Provider.of(context));
-      return const SizedBox();
-    });
+    Widget descendente() => Builder(
+      builder: (context) {
+        blocos.add(escopo.Provider.of(context));
+        return const SizedBox();
+      },
+    );
     final externo = escopo.Provider(
-      child: Column(children: [
-        descendente(),
-        escopo.Provider(child: descendente()),
-      ]),
+      child: Column(
+        children: [
+          descendente(),
+          escopo.Provider(child: descendente()),
+        ],
+      ),
     );
     await tester.pumpWidget(MaterialApp(home: externo));
 
