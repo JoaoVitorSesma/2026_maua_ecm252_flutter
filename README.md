@@ -6,7 +6,7 @@ Aplicações e exemplos em Flutter da disciplina ECM252 do Instituto Mauá de Te
 
 | Pasta | Conteúdo |
 | --- | --- |
-| [ap001_apostila_flutter_app_fotos](ap001_apostila_flutter_app_fotos/) | Aplicativo `exibe_imagens`, exemplos de Dart e implementação da apostila até a página 36. |
+| [ap001_apostila_flutter_app_fotos](ap001_apostila_flutter_app_fotos/) | Aplicativo `exibe_imagens`, exemplos de JSON, integração com a Pexels e exercícios da apostila até a página 77. |
 
 As plataformas, os recursos e os testes permanecem dentro da pasta da aplicação. Não existe uma aplicação Flutter na raiz deste repositório.
 
@@ -17,7 +17,7 @@ Instale o Flutter com um SDK Dart compatível com o `pubspec.yaml` da aplicaçã
 ```powershell
 cd ap001_apostila_flutter_app_fotos
 flutter pub get
-flutter run -d chrome
+flutter run -d chrome --dart-define=PEXELS_API_KEY=SUA_CHAVE_PEXELS
 ```
 
 Para conferir a aplicação, dentro dessa mesma pasta:
