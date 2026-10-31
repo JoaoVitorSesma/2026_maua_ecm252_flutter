@@ -36,6 +36,12 @@ void main() {
           requisicao.headers['Authorization'],
           const String.fromEnvironment('PEXELS_API_KEY'),
         );
+        await tester.tap(find.byIcon(Icons.add));
+        await tester.pumpAndSettle();
+        expect(requisicoes, hasLength(2));
+        expect(requisicoes.last.url.queryParameters['page'], '2');
+        expect(find.text('url: https://images.pexels.com/outra.jpg, alt: Uma pessoa lendo'),
+            findsOneWidget);
         expect(tester.takeException(), isNull);
       },
       () => MockClient((requisicao) async {
@@ -44,8 +50,12 @@ void main() {
           json.encode({
             'photos': [
               {
-                'src': {'medium': 'https://images.pexels.com/foto.jpg'},
-                'alt': 'Uma pessoa caminhando',
+                'src': {'medium': requisicoes.length == 1
+                    ? 'https://images.pexels.com/foto.jpg'
+                    : 'https://images.pexels.com/outra.jpg'},
+                'alt': requisicoes.length == 1
+                    ? 'Uma pessoa caminhando'
+                    : 'Uma pessoa lendo',
               },
             ],
           }),
