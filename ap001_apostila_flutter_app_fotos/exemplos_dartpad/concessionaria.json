@@ -1,0 +1,21 @@
+{
+  "cnpj": "123456789/0001",
+  "filiais": [
+    {
+      "nome": "Filial 1",
+      "endereco": {"logradouro": "Rua A", "numero": 100, "bairro": "Vila A"},
+      "veiculos": [
+        {"modelo": "Gol", "marca": "VW", "placa": "ABC-1234"},
+        {"modelo": "Celta", "marca": "Chevrolet", "placa": "DEF-5544"}
+      ]
+    },
+    {
+      "nome": "Filial 2",
+      "endereco": {"logradouro": "Rua B", "numero": 100, "bairro": "Vila B"},
+      "veiculos": [
+        {"modelo": "Corsa", "marca": "Chevrolet", "placa": "ERF-1122"},
+        {"modelo": "Fusca", "marca": "VW", "placa": "DEF-1111"}
+      ]
+    }
+  ]
+}
