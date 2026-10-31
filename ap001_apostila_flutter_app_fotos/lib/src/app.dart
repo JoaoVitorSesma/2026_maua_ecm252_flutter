@@ -14,8 +14,9 @@ class App extends StatefulWidget {
 
 class AppState extends State<App> {
   int numeroImagens = 0;
+  List<ImageModel> imagens = [];
 
-  void obterImagem() {
+  void obterImagem() async {
     var url = Uri.https('api.pexels.com', '/v1/search', {
       'query': 'people',
       'page': '1',
@@ -25,17 +26,17 @@ class AppState extends State<App> {
     req.headers.addAll({
       'Authorization': const String.fromEnvironment('PEXELS_API_KEY'),
     });
-    req.send().then((result) {
-      if (result.statusCode == 200) {
-        http.Response.fromStream(result).then((response) {
-          var decodedJSON = json.decode(response.body);
-          var imagem = ImageModel.fromJSON(decodedJSON);
-          print(imagem);
-        });
-      } else {
-        print('Falhou!');
-      }
-    });
+    final result = await req.send();
+    if (result.statusCode == 200) {
+      final response = await http.Response.fromStream(result);
+      var decodedJSON = json.decode(response.body);
+      var imagem = ImageModel.fromJSON(decodedJSON);
+      setState(() {
+        imagens.add(imagem);
+      });
+    } else {
+      print('Falhou!');
+    }
   }
 
   @override
