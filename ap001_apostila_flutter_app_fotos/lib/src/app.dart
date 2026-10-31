@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'models/image_model.dart';
+import 'widgets/image_list.dart';
 
 class App extends StatefulWidget {
   @override
@@ -44,7 +45,7 @@ class AppState extends State<App> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: const Text("Minhas Imagens")),
-        body: Text('$numeroImagens'),
+        body: ImageList(imagens),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: obterImagem,

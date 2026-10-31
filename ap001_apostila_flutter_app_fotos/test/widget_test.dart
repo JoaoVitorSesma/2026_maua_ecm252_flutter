@@ -13,11 +13,14 @@ void main() {
       () async {
         await tester.pumpWidget(App());
         expect(find.text('Minhas Imagens'), findsOneWidget);
-        expect(find.text('0'), findsOneWidget);
+      expect(find.text('0'), findsNothing);
+      expect(find.byType(ListView), findsOneWidget);
 
         await tester.tap(find.byIcon(Icons.add));
         await tester.pumpAndSettle();
 
+      expect(find.text('url: https://images.pexels.com/foto.jpg, alt: Uma pessoa caminhando'),
+          findsOneWidget);
         expect(requisicoes, hasLength(1));
         final requisicao = requisicoes.single;
         expect(requisicao.method, 'get');
