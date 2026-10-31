@@ -39,6 +39,12 @@ flutter run -d chrome
 
 O formulário faz uma submissão local fictícia e não exige chave de API. Consulte os READMEs da [apostila 01](ap001_apostila_flutter_app_fotos/README.md) e da [apostila 02](ap002_apostila_flutter_gerenciamento_de_estado/README.md) para as etapas, verificações e limitações. Dependências e arquivos gerados são preparados localmente em cada clone.
 
+## Diagnósticos e conferência no navegador
+
+As reproduções dos defeitos conhecidos ficam em `diagnosticos/` dentro de cada aplicação, separadas da suíte normal. Consulte as instruções da [apostila 01](ap001_apostila_flutter_app_fotos/diagnosticos/README.md) e da [apostila 02](ap002_apostila_flutter_gerenciamento_de_estado/diagnosticos/README.md). Um diagnóstico aprovado confirma a reprodução do defeito.
+
+Os [scripts de navegador](tools/browser/README.md) conferem as aplicações em duas larguras. Capturas, relatórios e dependências locais gerados por esses scripts são ignorados pelo Git.
+
 ## Origem e histórico
 
 Este projeto foi separado da pasta `flutter` da `main` de [2026_maua_ecm252](https://github.com/JoaoVitorSesma/2026_maua_ecm252). O commit da aplicação preserva autoria, datas e mensagem, com um novo identificador após a extração. As branches auxiliares e as tags continuam no repositório original.

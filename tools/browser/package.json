@@ -1,0 +1,11 @@
+{
+  "name": "ecm252-flutter-browser-qa",
+  "private": true,
+  "scripts": {
+    "qa:01": "node apostila01.cjs",
+    "qa:02": "node apostila02.cjs"
+  },
+  "devDependencies": {
+    "playwright-core": "1.62.1"
+  }
+}
