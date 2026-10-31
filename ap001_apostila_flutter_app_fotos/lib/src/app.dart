@@ -46,7 +46,16 @@ class AppState extends State<App> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: const Text("Minhas Imagens")),
-        body: ImageList(imagens),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Text('Você tem ${imagens.length} imagens'),
+            ),
+            Expanded(child: ImageList(imagens)),
+          ],
+        ),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: obterImagem,
