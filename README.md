@@ -7,6 +7,7 @@ Aplicações e exemplos em Flutter da disciplina ECM252 do Instituto Mauá de Te
 | Pasta | Conteúdo |
 | --- | --- |
 | [ap001_apostila_flutter_app_fotos](ap001_apostila_flutter_app_fotos/) | Aplicativo `exibe_imagens`, exemplos de JSON, integração com a Pexels e exercícios da apostila até a página 77. |
+| [ap002_apostila_flutter_gerenciamento_de_estado](ap002_apostila_flutter_gerenciamento_de_estado/) | Formulário `gerenciamento_de_estado`, BLoC, Provider próprio, RxDart, exemplos DartPad e Toast até a página 90. |
 
 As plataformas, os recursos e os testes permanecem dentro da pasta da aplicação. Não existe uma aplicação Flutter na raiz deste repositório.
 
@@ -28,7 +29,15 @@ flutter test
 flutter build web
 ```
 
-Consulte o [README da aplicação](ap001_apostila_flutter_app_fotos/README.md) para o estado atual da apostila e os exemplos. Dependências e arquivos gerados são preparados localmente em cada clone.
+Para o formulário da apostila 02, abra outro terminal na raiz deste repositório:
+
+```powershell
+cd ap002_apostila_flutter_gerenciamento_de_estado
+flutter pub get
+flutter run -d chrome
+```
+
+O formulário faz uma submissão local fictícia e não exige chave de API. Consulte os READMEs da [apostila 01](ap001_apostila_flutter_app_fotos/README.md) e da [apostila 02](ap002_apostila_flutter_gerenciamento_de_estado/README.md) para as etapas, verificações e limitações. Dependências e arquivos gerados são preparados localmente em cada clone.
 
 ## Origem e histórico
 
