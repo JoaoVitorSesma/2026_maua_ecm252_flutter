@@ -19,4 +19,14 @@ void main() {
     bloc.dispose();
     await Future.wait([email, senha]);
   });
+
+  test('Campos e botao podem ouvir os mesmos streams simultaneamente', () async {
+    final bloc = Bloc();
+    addTearDown(bloc.dispose);
+    final email = bloc.email.first;
+    final combinado = bloc.emailPasswordAreOk.first;
+    bloc.changeEmail('aluno@example.com');
+    bloc.changePassword('1234');
+    expect(await Future.wait<Object>([email, combinado]), ['aluno@example.com', true]);
+  });
 }

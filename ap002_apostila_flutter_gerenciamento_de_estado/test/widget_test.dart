@@ -22,6 +22,7 @@ void main() {
     expect(tester.getSize(find.byType(ElevatedButton)).width, largura - 40);
     expect(find.text('E-mail inválido'), findsNothing);
     expect(find.text('null'), findsNothing);
+    expect(tester.widget<ElevatedButton>(find.byType(ElevatedButton)).onPressed, isNull);
 
     await tester.enterText(find.byType(TextField).first, 'aluno');
     await tester.pumpAndSettle();
@@ -33,9 +34,14 @@ void main() {
     await tester.enterText(find.byType(TextField).last, '123');
     await tester.pumpAndSettle();
     expect(find.text('Senha deve ter, pelo menos, 4 caracteres'), findsOneWidget);
+    expect(tester.widget<ElevatedButton>(find.byType(ElevatedButton)).onPressed, isNull);
     await tester.enterText(find.byType(TextField).last, '1234');
     await tester.pumpAndSettle();
     expect(find.text('Senha deve ter, pelo menos, 4 caracteres'), findsNothing);
+    expect(tester.widget<ElevatedButton>(find.byType(ElevatedButton)).onPressed, isNotNull);
+    await tester.enterText(find.byType(TextField).first, 'aluno');
+    await tester.pumpAndSettle();
+    expect(tester.widget<ElevatedButton>(find.byType(ElevatedButton)).onPressed, isNull);
     expect(tester.takeException(), isNull);
   });
   }
