@@ -29,4 +29,14 @@ void main() {
     bloc.changePassword('1234');
     expect(await Future.wait<Object>([email, combinado]), ['aluno@example.com', true]);
   });
+
+  test('Um novo consumidor recebe o ultimo email digitado', () async {
+    final bloc = Bloc();
+    addTearDown(bloc.dispose);
+    bloc.changeEmail('aluno@example.com');
+    await expectLater(
+      bloc.email.first.timeout(const Duration(milliseconds: 100)),
+      completion('aluno@example.com'),
+    );
+  });
 }
